@@ -120,4 +120,9 @@ tasks:
       repo_name: '{{ .repo_name }}'
     cmds:
       - task: create-release-file
-      - cmd: .github/scripts/create-release.sh
+      - cmd: |
+          gh release create "{{ .tag }}" \
+            --title "{{ .title }}" \
+            --notes "{{ .body }}" \
+            --repo "{{ .repo_owner }}/{{ .repo_name }}" \
+            '{{ .zip_name }}'
