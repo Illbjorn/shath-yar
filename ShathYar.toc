@@ -1,0 +1,7 @@
+## Interface: 110007
+## Title: Shath'Yar
+## Notes: Speak the language of the Old Gods.
+## Author: Illbjorn-Stormrage
+## Version: 0.7.9
+
+ShathYar.lua
