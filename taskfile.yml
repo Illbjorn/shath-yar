@@ -6,6 +6,8 @@ vars:
     sh: cat '{{ .ver_path }}'
   dist_dir: 'shath-yar-{{ .ver }}'
   zip_name: '{{ .dist_dir }}.zip'
+  repo_owner: Illbjorn
+  repo_name: shath-yar
 
 tasks:
   version:
