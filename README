@@ -1,0 +1,11 @@
+Shath'Yar language addon for WoW
+================================
+
+Speak the language of the Old Gods, as uttered by Shadow Priests in Voidform.
+
+* `/sysay your text here` (or `/sys`, or just `/sy`) to `/say` something in
+Shath'Yar.
+* `/syyell your text here` (or `/syy`) to `/yell` it.
+
+Copyright © 2018 Franzetta, dedicated acolyte of the Void on Dark Iron (US).
+Code released under the WTFPL; see the `COPYING` file for more details.
