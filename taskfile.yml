@@ -11,6 +11,8 @@ vars:
   # Build Info
   dist_dir: 'shath-yar-{{ .ver }}'
   zip_name: '{{ .dist_dir }}.zip'
+  toc_name: 'ShathYar.toc'
+  toc_ver: 110007
 
   ##############################################################################
   # Repository Info
@@ -64,12 +66,28 @@ tasks:
         vars:
           tag: '{{ .tag }}'
 
+  generate-toc:
+    aliases: [toc]
+    cmd: |
+      cat << 'EOF' > '{{ .toc_name }}'
+      ## Interface: 110007
+      ## Title: Shath'Yar
+      ## Notes: Speak the language of the Old Gods.
+      ## Author: Illbjorn-Stormrage
+      ## Version: {{ .ver }}
+
+      ShathYar.lua
+      EOF
+
   create-release-file:
+    aliases: [build]
     desc: Creates the zipped release file to attach to the GitHub release.
     cmds:
       - cmd: rm -rf *.zip
       - cmd: mkdir '{{ .dist_dir }}'
       - defer: rm -rf '{{ .dist_dir }}'
+      - task: generate-toc
+      - defer: rm -rf '{{ .toc_name }}'
       - cmd: cp ShathYar.lua '{{ .dist_dir }}'
       - cmd: cp ShathYar.toc '{{ .dist_dir }}'
       - cmd: cp ShathYar.xml '{{ .dist_dir }}'

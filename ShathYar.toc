@@ -1,7 +1,0 @@
-## Interface: 80000
-## Title: Shath'Yar
-## Notes: Speak the language of the Old Gods with /sysay and /syyell
-## Author: Franzetta, Shadow Priest of Dark Iron (US)
-## Version: 0.4
-
-ShathYar.lua
