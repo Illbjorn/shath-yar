@@ -1,0 +1,35 @@
+name: On Merge to Main
+
+on:
+  push:
+    branches: [main]
+
+concurrency:
+  cancel-in-progress: true
+  group: ${{ github.workflow }}
+
+jobs:
+  release:
+    name: Create Release
+    runs-on: [ubuntu-latest]
+    permissions:
+      # Required to create the release.
+      contents: write
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # 4.2.2
+        with:
+          fetch-depth: 0
+
+      - name: Set up Task
+        uses: illbjorn/setup-task@main
+
+      - name: Create the GitHub Release
+        shell: bash
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          task cr \
+            tag="v$(task v)" \
+            title="Shath'yar Release: $(task v)" \
+            body="$(task rn)"

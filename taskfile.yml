@@ -4,8 +4,17 @@ vars:
   ver_path: .github/VERSION
   ver:
     sh: cat '{{ .ver_path }}'
+  dist_dir: 'shath-yar-{{ .ver }}'
+  zip_name: '{{ .dist_dir }}.zip'
 
 tasks:
+  version:
+    aliases: [v]
+    desc: Outputs the current Shath'yar version.
+    silent: true
+    interactive: true
+    cmd: echo '{{ .ver }}'
+
   # Task: Bump
   #
   # >> Examples
@@ -33,8 +42,7 @@ tasks:
     internal: true
     cmd: git push origin '{{ .tag }}'
 
-  release:
-    aliases: [r]
+  create-tagged-release:
     desc: Creates a Git tag from '{{ .ver_path }}' and pushes to that ref.
     vars:
       tag: 'v{{ .ver }}'
@@ -45,3 +53,31 @@ tasks:
       - task: push-tag-ref
         vars:
           tag: '{{ .tag }}'
+
+  release-file:
+    desc: Creates the zipped release file to attach to the GitHub release.
+    cmds:
+      - cmd: rm -rf *.zip
+      - cmd: mkdir '{{ .dist_dir }}'
+      - defer: rm -rf '{{ .dist_dir }}'
+      - cmd: cp ShathYar.lua '{{ .dist_dir }}'
+      - cmd: cp ShathYar.toc '{{ .dist_dir }}'
+      - cmd: cp ShathYar.xml '{{ .dist_dir }}'
+      - cmd: cp LICENSE '{{ .dist_dir }}'
+      - cmd: zip -r '{{ .zip_name }}' '{{ .dist_dir }}'
+
+  create-release:
+    aliases: [cr]
+    desc: Creates a GitHub release.
+    preconditions:
+      - sh: '[[ -n "{{ .tag }}" ]]'
+        msg: A 'tag' input value is required.
+      - sh: '[[ -n "{{ .title }}" ]]'
+        msg: A 'title' input value is required.
+    env:
+      tag: '{{ .tag }}'
+      title: '{{ .title }}'
+      body: '{{ .body }}'
+      files: '{{ .zip_name }}'
+    deps: [release-file]
+    cmd: .github/scripts/create-release.sh
