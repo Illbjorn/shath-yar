@@ -1,11 +1,19 @@
 version: '3'
 
 vars:
+  ##############################################################################
+  # Version Info
   ver_path: .github/VERSION
   ver:
     sh: cat '{{ .ver_path }}'
+
+  ##############################################################################
+  # Build Info
   dist_dir: 'shath-yar-{{ .ver }}'
   zip_name: '{{ .dist_dir }}.zip'
+
+  ##############################################################################
+  # Repository Info
   repo_owner: Illbjorn
   repo_name: shath-yar
 
@@ -77,8 +85,8 @@ tasks:
       message between provided refs 's' (start) and 'e' (end).
     cmd: git log --pretty=format:'- %s' {{ .s }}...{{ .e }}
 
-  create-release:
-    aliases: [cr]
+  create-github-release:
+    aliases: [cghr]
     desc: Creates a GitHub release.
     preconditions:
       - sh: '[[ -n "{{ .tag }}" ]]'
