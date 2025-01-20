@@ -2,6 +2,8 @@ version: '3'
 
 vars:
   ver_path: .github/VERSION
+  ver:
+    sh: cat '{{ .ver_path }}'
 
 tasks:
   # Task: Bump
@@ -22,3 +24,16 @@ tasks:
     vars:
       segment: '{{ if .s }}{{ .s }}{{ else }}patch{{ end }}'
     cmd: ver_path='{{ .ver_path }}' segment='{{ .segment }}' .github/scripts/bump.sh
+
+  release:
+    aliases: [r]
+    desc: Creates a Git tag from '{{ .ver_path }}' and pushes to that ref.
+    vars:
+      tag: 'v{{ .ver }}'
+    cmds:
+      - task: create-git-tag
+        vars:
+          tag: '{{ .tag }}'
+      - task: push-tag-ref
+        vars:
+          tag: '{{ .tag }}'
