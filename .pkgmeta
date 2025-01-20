@@ -1,2 +1,2 @@
 package-as: Shath'yar
-ignore: [taskfile.yml]
+ignore: [taskfile.yml, README.md]
