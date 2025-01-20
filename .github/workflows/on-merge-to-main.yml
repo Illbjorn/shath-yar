@@ -29,7 +29,9 @@ jobs:
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
+          base="$(git show-ref --tags | head -1 | awk '{print $1}')"
+          head="${{ github.sha }}"
           task cr \
             tag="v$(task v)" \
             title="Shath'yar Release: $(task v)" \
-            body="$(task rn)"
+            body="$(task rn s="${base}" e="${head}")"

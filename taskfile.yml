@@ -68,6 +68,15 @@ tasks:
       - cmd: cp LICENSE '{{ .dist_dir }}'
       - cmd: zip -r '{{ .zip_name }}' '{{ .dist_dir }}'
 
+  release-notes:
+    aliases: [rn]
+    interactive: true
+    silent: true
+    desc: |
+      Produces a set of markdown unordered list bullet points of each commit
+      message between provided refs 's' (start) and 'e' (end).
+    cmd: git log --pretty=format:'- %s' {{ .s }}...{{ .e }}
+
   create-release:
     aliases: [cr]
     desc: Creates a GitHub release.
