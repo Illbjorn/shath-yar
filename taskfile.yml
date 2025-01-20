@@ -1,0 +1,21 @@
+version: '3'
+
+tasks:
+  # Task: Bump
+  #
+  # >> Examples
+  #     $ task bump
+  #     Incrementing version ['0.1.4']=>['0.1.5'].
+  #
+  #     $ task bump s=minor
+  #     Incrementing version ['0.1.4']=>['0.2.0'].
+  #
+  #     $ task bump s=major
+  #     Incrementing version ['0.1.4']=>['1.0.0'].
+  #
+  bump:
+    aliases: [b]
+    desc: Bumps the provided segment of the semver string at {{ .ver_path }}.
+    vars:
+      segment: '{{ if .s }}{{ .s }}{{ else }}patch{{ end }}'
+    cmd: ver_path='{{ .ver_path }}' segment='{{ .segment }}' .github/scripts/bump.sh
