@@ -81,5 +81,7 @@ tasks:
       title: '{{ .title }}'
       body: '{{ .body }}'
       files: '{{ .zip_name }}'
+      repo_owner: '{{ .repo_owner }}'
+      repo_name: '{{ .repo_name }}'
     deps: [release-file]
     cmd: .github/scripts/create-release.sh
