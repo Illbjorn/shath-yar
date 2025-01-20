@@ -25,6 +25,14 @@ tasks:
       segment: '{{ if .s }}{{ .s }}{{ else }}patch{{ end }}'
     cmd: ver_path='{{ .ver_path }}' segment='{{ .segment }}' .github/scripts/bump.sh
 
+  create-git-tag:
+    internal: true
+    cmd: git tag '{{ .tag }}'
+
+  push-tag-ref:
+    internal: true
+    cmd: git push origin '{{ .tag }}'
+
   release:
     aliases: [r]
     desc: Creates a Git tag from '{{ .ver_path }}' and pushes to that ref.
