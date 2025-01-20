@@ -12,34 +12,181 @@
 ]] --
 
 local shathYarSounds = {
-  { 'i' },
-  { 'ag',  'ez',  'ga',  'ky',  'ma',  'ni',  'og',  'za',  'zz' },
-  { 'gag', 'hoq', 'lal', 'maq', 'nuq', 'oou', 'qam', 'shn', 'vaz', 'vra', 'yrr', 'zuq' },
-  { 'agth', 'amun', 'arwi', 'fssh', 'ifis', 'kyth', 'nuul', 'ongg', 'puul', 'qwaz', 'qwor', 'ryiu', 'shfk', 'thoq',
-    'uull', 'vwah', 'vwyq', "w'oq",
-    'wgah', 'ywaq', 'zaix', 'zzof' },
-  { "ag'rr", 'agthu', "ak'uq", 'anagg', "bo'al", 'fhssh', "h'iwn", 'hnakf',
-    'huqth', 'iilth', 'iiyoq', 'lwhuk', "on'ma", 'plahf', 'shkul', 'shuul',
-    'thyzz', 'uulwi', 'vorzz', "w'ssh", 'yyqzz' },
-  { "ag'xig", "al'tha", "an'qov", "an'zig", 'bormaz', "c'toth", "far'al",
-    "h'thon", 'halahs', 'iggksh', "ka'kar", 'kaaxth', 'marwol', "n'zoth",
-    'qualar', 'qvsakf', "shn'ma", "sk'tek", 'skshgn', 'ssaggh', 'tallol',
-    'tulall', 'uhnish', 'uovssh', 'vormos', 'yawifk', "yoq'al", "yu'gaz" },
-  { "an'shel", 'awtgssh', "guu'lal", 'guulphg', 'iiqaath', "kssh'ga",
-    "mh'naus", "n'lyeth", "ph'magg", 'qornaus', 'shandai', "shg'cul",
-    "shg'fhn", "sk'magg", "sk'yahf", "uul'gwa", "uulg'ma", 'vwahuhn',
-    "woth'gl", "yeh'glu", "yyg'far", 'zyqtahg' },
-  { 'awtgsshu', "erh'ongg", "gul'kafh", 'halsheth', "log'loth", "mar'kowa",
-    "muoq'vsh", 'phquathi', "qi'plahf", "qi'uothk", "sk'shuul", "sk'uuyat",
-    "ta'thall", "thoth'al", "uhn'agth", "ye'tarin", "yoh'ghyl", "zuq'nish" },
-  { "ag'thyzak", "ga'halahs", "lyrr'keth", "par'okoth", "phgwa'cul",
-    "pwhn'guul", "ree'thael", "shath'yar", "shgla'yos", "shuul'wah",
-    "sshoq'meg" },
-  { "ak'agthshi",  "shg'ullwaq",  "sk'woth'gl" },
-  { "ghawl'fwata", "naggwa'fssh", "yeq'kafhgyl" },
+  {
+    'i'
+  },
+  {
+    'ag',
+    'ez',
+    'ga',
+    'ky',
+    'ma',
+    'ni',
+    'og',
+    'za',
+    'zz'
+  },
+  {
+    'gag',
+    'hoq',
+    'lal',
+    'maq',
+    'nuq',
+    'oou',
+    'qam',
+    'shn',
+    'vaz',
+    'vra',
+    'yrr',
+    'zuq'
+  },
+  {
+    'agth',
+    'amun',
+    'arwi',
+    'fssh',
+    'ifis',
+    'kyth',
+    'nuul',
+    'ongg',
+    'puul',
+    'qwaz',
+    'qwor',
+    'ryiu',
+    'shfk',
+    'thoq',
+    'uull',
+    'vwah',
+    'vwyq',
+    "w'oq",
+    'wgah',
+    'ywaq',
+    'zaix',
+    'zzof'
+  },
+  {
+    "ag'rr",
+    'agthu',
+    "ak'uq",
+    'anagg',
+    "bo'al",
+    'fhssh',
+    "h'iwn",
+    'hnakf',
+    'huqth',
+    'iilth',
+    'iiyoq',
+    'lwhuk',
+    "on'ma",
+    'plahf',
+    'shkul',
+    'shuul',
+    'thyzz',
+    'uulwi',
+    'vorzz',
+    "w'ssh",
+    'yyqzz'
+  },
+  {
+    "ag'xig",
+    "al'tha",
+    "an'qov",
+    "an'zig",
+    'bormaz',
+    "c'toth",
+    "far'al",
+    "h'thon",
+    'halahs',
+    'iggksh',
+    "ka'kar",
+    'kaaxth',
+    'marwol',
+    "n'zoth",
+    'qualar',
+    'qvsakf',
+    "shn'ma",
+    "sk'tek",
+    'skshgn',
+    'ssaggh',
+    'tallol',
+    'tulall',
+    'uhnish',
+    'uovssh',
+    'vormos',
+    'yawifk',
+    "yoq'al",
+    "yu'gaz"
+  },
+  {
+    "an'shel",
+    'awtgssh',
+    "guu'lal",
+    'guulphg',
+    'iiqaath',
+    "kssh'ga",
+    "mh'naus",
+    "n'lyeth",
+    "ph'magg",
+    'qornaus',
+    'shandai',
+    "shg'cul",
+    "shg'fhn",
+    "sk'magg",
+    "sk'yahf",
+    "uul'gwa",
+    "uulg'ma",
+    'vwahuhn',
+    "woth'gl",
+    "yeh'glu",
+    "yyg'far",
+    'zyqtahg'
+  },
+  {
+    'awtgsshu',
+    "erh'ongg",
+    "gul'kafh",
+    'halsheth',
+    "log'loth",
+    "mar'kowa",
+    "muoq'vsh",
+    'phquathi',
+    "qi'plahf",
+    "qi'uothk",
+    "sk'shuul",
+    "sk'uuyat",
+    "ta'thall",
+    "thoth'al",
+    "uhn'agth",
+    "ye'tarin",
+    "yoh'ghyl",
+    "zuq'nish"
+  },
+  {
+    "ag'thyzak",
+    "ga'halahs",
+    "lyrr'keth",
+    "par'okoth",
+    "phgwa'cul",
+    "pwhn'guul",
+    "ree'thael",
+    "shath'yar",
+    "shgla'yos",
+    "shuul'wah",
+    "sshoq'meg"
+  },
+  {
+    "ak'agthshi",
+    "shg'ullwaq",
+    "sk'woth'gl"
+  },
+  {
+    "ghawl'fwata",
+    "naggwa'fssh",
+    "yeq'kafhgyl"
+  },
 }
 
-SStrHash_constants = {
+local hashConstants = {
   0x486e26ee,
   0xdcaa16b3,
   0xe1918eef,
@@ -90,88 +237,117 @@ SStrHash_constants = {
   0x6f4893ca,
 }
 
-function SStrHash(word)
+--- This is a relatively arbitrary hashing function derived from SStrHash,
+--- which itself is purportedly the algorithm used to hash MPQ files.
+local function hashWord(word)
   local seed1 = 0x7FED7FED
   local seed2 = 0xEEEEEEEE
 
+  --- Upper-case the entire word
   word = string.upper(word)
 
   for i = 1, word:len() do
-    local ch = word:byte(i)
-    seed1 = bit.bxor(seed1 + seed2,
-      (SStrHash_constants[bit.rshift(ch, 4) + 1] -
-        SStrHash_constants[bit.band(ch, 0xf) + 1]))
-    seed2 = bit.lshift(seed2, 5) + seed2 + ch + seed1 + 3
+    --- Get byte representation of this letter
+    local charByte = word:byte(i)
+
+    --- Shift right 4
+    local shifted = bit.rshift(charByte, 4) + 1
+    --- Mask last 4 bits
+    local masked = bit.band(charByte, 0xf) + 1
+    --- Fetch a constant by the shifted resut
+    local c1 = hashConstants[shifted]
+    --- Fetch a constant by the masked result
+    local c2 = hashConstants[masked]
+    local xorBy = c1 - c2
+
+    seed1 = bit.bxor(seed1 + seed2, xorBy)
+    seed2 = bit.lshift(seed2, 5) + seed2 + charByte + seed1 + 3
   end
 
   return seed1
 end
 
-function ShathYar_MatchCase(msg, to_match)
-  local msg_letters = {}
-  for msg_letter in msg:gmatch('.') do
-    table.insert(msg_letters, msg_letter)
+--- @param msg string
+--- @param to_match string
+local function matchCase(msg, to_match)
+  local chars = {}
+  for char in msg:gmatch('.') do
+    table.insert(chars, char)
   end
 
-  local match_letters = {}
-  for match_letter in to_match:gmatch('.') do
-    table.insert(match_letters, match_letter)
+  local matchChars = {}
+  for matchChar in to_match:gmatch('.') do
+    table.insert(matchChars, matchChar)
   end
 
-  local sy_letters = {}
-  for i = 1, #msg_letters do
-    if match_letters[i] == string.upper(match_letters[i]) then
-      table.insert(sy_letters, string.upper(msg_letters[i]))
+  local ret = ''
+  for i = 1, #chars do
+    if matchChars[i] == string.upper(matchChars[i]) then
+      ret = ret .. string.upper(chars[i])
     else
-      table.insert(sy_letters, string.lower(msg_letters[i]))
+      ret = ret .. string.lower(chars[i])
     end
   end
 
-  return table.concat(sy_letters, '')
+  return ret
 end
 
-function ShathYar_Translate(msg)
+local function translate(msg)
+  --- Break the original message into individual words
   local words = {}
   for word in msg:gmatch("[A-Za-z0-9']+") do
     table.insert(words, word)
   end
 
-  local sy_words = {}
-  for k, word in pairs(words) do
-    local table_for_len = shathYarSounds[word:len()]
-    if table_for_len == nil then
-      table_for_len = shathYarSounds[#shathYarSounds]
+  local syWords = {}
+  for _, word in pairs(words) do
+    local soundsTable = shathYarSounds[word:len()]
+    if soundsTable == nil then
+      soundsTable = shathYarSounds[#shathYarSounds]
     end
 
-    local table_word = table_for_len[(SStrHash(word) % #table_for_len) + 1]
-    table.insert(sy_words, ShathYar_MatchCase(table_word, word))
+    --- Hash the word and mod it by length of sounds + 1
+    local hashed = hashWord(word) % #soundsTable + 1
+    --- Get the shath'yar word at the hashed index
+    local syWord = soundsTable[hashed]
+    --- Match casing of the original message
+    local syWordCased = matchCase(syWord, word)
+
+    table.insert(syWords, syWordCased)
   end
 
-  return table.concat(sy_words, ' ')
+  return table.concat(syWords, ' ')
 end
 
-function ShathYar_SendChatMessage(msg, chatType)
+local function emit(msg, chatType)
+  --- Collect the player's language ID
   local _, language = GetDefaultLanguage()
 
-  local in_voidform = false
+  --- Check if we're in Voidform
+  --- If the player is in Voidform, we don't garble the output (player speaks
+  --- Shath'yar)
+  local inVoidform = false
   for i = 1, 40 do
-    local aura_data = C_UnitAuras.GetAuraDataByIndex(
+    local auraData = C_UnitAuras.GetAuraDataByIndex(
       'player',
       i
     )
 
-    if aura_data ~= nil then
-      if aura_data.spellId == 194249 then
-        in_voidform = true
+    if auraData ~= nil then
+      if auraData.spellId == 194249 then
+        inVoidform = true
       end
     end
   end
 
-  if in_voidform then
+  if inVoidform then
     SendChatMessage(msg, chatType, language)
   else
-    SendChatMessage("[Shath'Yar] " .. ShathYar_Translate(msg),
-      chatType, language)
+    SendChatMessage(
+      "[Shath'Yar] " .. translate(msg),
+      chatType,
+      language
+    )
   end
 end
 
@@ -179,22 +355,23 @@ SLASH_SYSAY1 = "/sy"
 SLASH_SYSAY2 = "/sys"
 SLASH_SYSAY3 = "/sysay"
 SlashCmdList["SYSAY"] = function(msg)
-  ShathYar_SendChatMessage(msg, "say")
+  emit(msg, "say")
 end
 
 SLASH_SYYELL1 = "/syy"
 SLASH_SYYELL2 = "/syyell"
 SlashCmdList["SYYELL"] = function(msg)
-  ShathYar_SendChatMessage(msg, "yell")
+  emit(msg, "yell")
 end
 
 SLASH_SYPRINT1 = "/syp"
 SLASH_SYPRINT2 = "/syprint"
 SlashCmdList["SYPRINT"] = function(msg)
-  print(ShathYar_Translate(msg))
+  print(translate(msg))
 end
 
 SLASH_SYGUILD1 = "/syg"
+SLASH_SYGUILD2 = "/syguild"
 SlashCmdList["SYGUILD"] = function(msg)
-  ShathYar_SendChatMessage(msg, "guild")
+  emit(msg, "guild")
 end
