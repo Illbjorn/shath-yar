@@ -364,7 +364,6 @@ SlashCmdList["SYYELL"] = function(msg)
   emit(msg, "yell")
 end
 
-SLASH_SYPRINT1 = "/syp"
 SLASH_SYPRINT2 = "/syprint"
 SlashCmdList["SYPRINT"] = function(msg)
   print(translate(msg))
@@ -374,4 +373,16 @@ SLASH_SYGUILD1 = "/syg"
 SLASH_SYGUILD2 = "/syguild"
 SlashCmdList["SYGUILD"] = function(msg)
   emit(msg, "guild")
+end
+
+SLASH_SYRAID1 = "/syr"
+SLASH_SYRAID2 = "/syraid"
+SlashCmdList["SYRAID"] = function(msg)
+  emit(msg, "raid")
+end
+
+SLASH_SYPARTY1 = "/syp"
+SLASH_SYPARTY2 = "/syparty"
+SlashCmdList["SYPARTY"] = function(msg)
+  emit(msg, "party")
 end
