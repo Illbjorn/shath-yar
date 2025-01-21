@@ -341,7 +341,12 @@ end
 
 --- @param msg string
 --- @param chatType ChatType
-local function emit(msg, chatType)
+--- @param addressee string?
+local function emit(
+    msg,
+    chatType,
+    addressee
+)
   --- Collect the player's language ID
   local _, language = GetDefaultLanguage()
 
@@ -362,15 +367,29 @@ local function emit(msg, chatType)
     end
   end
 
+  local shathyarMsg = "[Shath'Yar] " .. translate(msg)
   if inVoidform then
     SendChatMessage(msg, chatType, language)
+  elseif chatType == "WHISPER" then
+    SendChatMessage(
+      shathyarMsg,
+      chatType,
+      language,
+      addressee
+    )
   else
     SendChatMessage(
-      "[Shath'Yar] " .. translate(msg),
+      shathyarMsg,
       chatType,
       language
     )
   end
+end
+
+SLASH_SYWHISPER = "/syw"
+SlashCmdList["SYWHISPER"] = function(msg)
+  local addressee = string.match(msg, "^%S+")
+  emit(msg, "WHISPER", addressee)
 end
 
 SLASH_SYSAY1 = "/sy"
