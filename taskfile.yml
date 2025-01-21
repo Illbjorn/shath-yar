@@ -10,6 +10,7 @@ vars:
 
   ##############################################################################
   # Build Info
+  addon_name: ShathYar
   dist_dir: 'shath-yar-{{ .ver }}'
   zip_name: '{{ .dist_dir }}.zip'
   toc_name: 'ShathYar.toc'
@@ -23,7 +24,34 @@ vars:
   repo_owner: Illbjorn
   repo_name: shath-yar
 
+dotenv: [.env]
+interval: 250ms
+
 tasks:
+  #
+  # NOTE: The `addons_dir` variable must be defined in your local .env file.
+  #
+  dev: &task-dev
+    aliases: [d]
+    desc: Deploys the addon to your local WoW addons folder.
+    cmds:
+      # Remove any existing addon files
+      - cmd: rm -rf "{{ .addons_dir }}/{{ .addon_name }}/*"
+      # Regenerate the TOC file
+      - task: generate-toc
+      # Copy in the current addon files
+      - cmd: cp ShathYar.lua "{{ .addons_dir }}/{{ .addon_name }}"
+      - cmd: cp ShathYar.toc "{{ .addons_dir }}/{{ .addon_name }}"
+      - cmd: cp ShathYar.xml "{{ .addons_dir }}/{{ .addon_name }}"
+      - cmd: cp LICENSE "{{ .addons_dir }}/{{ .addon_name }}"
+
+  devw:
+    aliases: [dw]
+    desc: Deploys the addon to your local WoW addons folder, in watch mode.
+    <<: *task-dev
+    watch: true
+    sources: ['ShathYar.lua', 'ShathYar.toc', 'ShathYar.xml', 'LICENSE']
+
   version:
     aliases: [v]
     desc: Outputs the current Shath'yar version.
