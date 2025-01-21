@@ -29,7 +29,7 @@ jobs:
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
-          base="$(git show-ref --tags | head -1 | awk '{print $1}')"
+          base="$(git show-ref --tags | tail -1 | awk '{print $1}')"
           head="${{ github.sha }}"
           task cghr \
             tag="v$(task v)" \

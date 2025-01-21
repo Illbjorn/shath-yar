@@ -111,7 +111,6 @@ tasks:
       - cmd: zip -r '{{ .zip_name }}' '{{ .dist_dir }}'
 
   publish-github-release:
-    aliases: [ghr]
     desc: Publishes the release file to GitHub.
     env:
       tag: '{{ .tag }}'
