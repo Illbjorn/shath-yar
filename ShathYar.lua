@@ -355,11 +355,7 @@ local function emit(
   --- Shath'yar)
   local inVoidform = false
   for i = 1, 40 do
-    local auraData = C_UnitAuras.GetAuraDataByIndex(
-      'player',
-      i
-    )
-
+    local auraData = C_UnitAuras.GetAuraDataByIndex('player', i)
     if auraData ~= nil then
       if auraData.spellId == 194249 then
         inVoidform = true
@@ -386,7 +382,7 @@ local function emit(
   end
 end
 
-SLASH_SYWHISPER = "/syw"
+SLASH_SYWHISPER1 = "/syw"
 SlashCmdList["SYWHISPER"] = function(msg)
   local addressee = string.match(msg, "^%S+")
   emit(msg, "WHISPER", addressee)
