@@ -1,3 +1,5 @@
 .vscode
 .idea
 *.zip
+.env
+.task
