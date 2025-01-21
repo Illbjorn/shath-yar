@@ -120,7 +120,7 @@ tasks:
       repo_name: '{{ .repo_name }}'
       zip_name: '{{ .zip_name }}'
     cmds:
-      - cmd: .github/scripts/publish-release.sh
+      - cmd: .github/scripts/create-release.sh
 
   create-github-release:
     aliases: [cghr]
