@@ -2,6 +2,6 @@
 ## Title: Shath'Yar
 ## Notes: Speak the language of the Old Gods.
 ## Author: Illbjorn-Stormrage
-## Version: 0.8.2
+## Version: 0.8.3
 
 ShathYar.lua
