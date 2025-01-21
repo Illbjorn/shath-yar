@@ -76,7 +76,10 @@ tasks:
     desc: Bumps the provided segment of the semver string at {{ .ver_path }}.
     vars:
       segment: '{{ if .s }}{{ .s }}{{ else }}patch{{ end }}'
-    cmd: ver_path='{{ .ver_path }}' segment='{{ .segment }}' .github/scripts/bump.sh
+    env:
+      ver_path: '{{ .ver_path }}'
+      segment: '{{ .segment }}'
+    cmd: .github/scripts/bump.sh
 
   create-git-tag:
     internal: true

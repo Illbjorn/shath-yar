@@ -384,7 +384,12 @@ end
 
 SLASH_SYWHISPER1 = "/syw"
 SlashCmdList["SYWHISPER"] = function(msg)
+  --- Get the name of the person to whisper, as the first word (delimited by
+  --- spaces)
   local addressee = string.match(msg, "^%S+")
+  --- The remainder of the string, past the first word and following space(s) is
+  --- the actual message
+  msg = string.match(msg, "^%S+%s+(.*)$") or ""
   emit(msg, "WHISPER", addressee)
 end
 
