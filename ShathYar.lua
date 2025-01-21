@@ -1,5 +1,17 @@
 --[[
 
+  RELOADED LICENSE:
+
+  Shath'Yar Language Addon for WoW
+  Copyright © 2018, Franzetta-DarkIron
+  Copyright © 2025, Illbjorn-Stormrage
+
+  This program is free software. It comes without any warranty, to the extent
+  permitted by applicable law. You can redistribute it and/or modify it under
+  the terms of the MIT License. See the LICENSE file for more details.
+
+  ORIGINAL LICENSE:
+
   Shath'Yar Language Addon for WoW
   Copyright © 2018, Franzetta-DarkIron
 
@@ -237,8 +249,11 @@ local hashConstants = {
   0x6f4893ca,
 }
 
+
 --- This is a relatively arbitrary hashing function derived from SStrHash,
 --- which itself is purportedly the algorithm used to hash MPQ files.
+--- @param word string
+--- @return number
 local function hashWord(word)
   local seed1 = 0x7FED7FED
   local seed2 = 0xEEEEEEEE
@@ -267,8 +282,10 @@ local function hashWord(word)
   return seed1
 end
 
+--- Matches the casing of the original message.
 --- @param msg string
 --- @param to_match string
+--- @return stringView
 local function matchCase(msg, to_match)
   local chars = {}
   for char in msg:gmatch('.') do
@@ -292,6 +309,9 @@ local function matchCase(msg, to_match)
   return ret
 end
 
+--- Translates a message to Shath'yar.
+--- @param msg string
+--- @return string
 local function translate(msg)
   --- Break the original message into individual words
   local words = {}
@@ -319,6 +339,8 @@ local function translate(msg)
   return table.concat(syWords, ' ')
 end
 
+--- @param msg string
+--- @param chatType ChatType
 local function emit(msg, chatType)
   --- Collect the player's language ID
   local _, language = GetDefaultLanguage()
@@ -355,13 +377,13 @@ SLASH_SYSAY1 = "/sy"
 SLASH_SYSAY2 = "/sys"
 SLASH_SYSAY3 = "/sysay"
 SlashCmdList["SYSAY"] = function(msg)
-  emit(msg, "say")
+  emit(msg, "SAY")
 end
 
 SLASH_SYYELL1 = "/syy"
 SLASH_SYYELL2 = "/syyell"
 SlashCmdList["SYYELL"] = function(msg)
-  emit(msg, "yell")
+  emit(msg, "YELL")
 end
 
 SLASH_SYPRINT2 = "/syprint"
@@ -372,17 +394,23 @@ end
 SLASH_SYGUILD1 = "/syg"
 SLASH_SYGUILD2 = "/syguild"
 SlashCmdList["SYGUILD"] = function(msg)
-  emit(msg, "guild")
+  emit(msg, "GUILD")
 end
 
 SLASH_SYRAID1 = "/syr"
 SLASH_SYRAID2 = "/syraid"
 SlashCmdList["SYRAID"] = function(msg)
-  emit(msg, "raid")
+  emit(msg, "RAID")
+end
+
+SLASH_SYRAIDW1 = "/syrw"
+SLASH_SYRAIDW2 = "/syraidw"
+SlashCmdList["SYRAIDW"] = function(msg)
+  emit(msg, "RAID_WARNING")
 end
 
 SLASH_SYPARTY1 = "/syp"
 SLASH_SYPARTY2 = "/syparty"
 SlashCmdList["SYPARTY"] = function(msg)
-  emit(msg, "party")
+  emit(msg, "PARTY")
 end
