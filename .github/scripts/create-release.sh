@@ -10,4 +10,4 @@ gh release create "${tag}" \
   --title "${title}" \
   --notes "${body}" \
   --repo "${repo_owner}/${repo_name}" \
-  ${files}
+  "${zip_name}"

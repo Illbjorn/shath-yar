@@ -6,6 +6,7 @@ vars:
   ver_path: .github/VERSION
   ver:
     sh: cat '{{ .ver_path }}'
+  tag: 'v{{ .ver }}'
 
   ##############################################################################
   # Build Info
@@ -13,6 +14,9 @@ vars:
   zip_name: '{{ .dist_dir }}.zip'
   toc_name: 'ShathYar.toc'
   toc_ver: 110007
+  lua_files: [
+    'ShathYar.lua',
+  ]
 
   ##############################################################################
   # Repository Info
@@ -56,43 +60,24 @@ tasks:
 
   create-tagged-release:
     desc: Creates a Git tag from '{{ .ver_path }}' and pushes to that ref.
-    vars:
-      tag: 'v{{ .ver }}'
     cmds:
       - task: create-git-tag
-        vars:
-          tag: '{{ .tag }}'
       - task: push-tag-ref
-        vars:
-          tag: '{{ .tag }}'
 
   generate-toc:
     aliases: [toc]
+    vars:
+      files: '{{ join "\n" .lua_files }}'
     cmd: |
       cat << 'EOF' > '{{ .toc_name }}'
-      ## Interface: 110007
+      ## Interface: {{ .toc_ver }}
       ## Title: Shath'Yar
       ## Notes: Speak the language of the Old Gods.
       ## Author: Illbjorn-Stormrage
       ## Version: {{ .ver }}
 
-      ShathYar.lua
+      {{ .files }}
       EOF
-
-  create-release-file:
-    aliases: [build]
-    desc: Creates the zipped release file to attach to the GitHub release.
-    cmds:
-      - cmd: rm -rf *.zip
-      - cmd: mkdir '{{ .dist_dir }}'
-      - defer: rm -rf '{{ .dist_dir }}'
-      - task: generate-toc
-      - defer: rm -rf '{{ .toc_name }}'
-      - cmd: cp ShathYar.lua '{{ .dist_dir }}'
-      - cmd: cp ShathYar.toc '{{ .dist_dir }}'
-      - cmd: cp ShathYar.xml '{{ .dist_dir }}'
-      - cmd: cp LICENSE '{{ .dist_dir }}'
-      - cmd: zip -r '{{ .zip_name }}' '{{ .dist_dir }}'
 
   release-notes:
     aliases: [rn]
@@ -103,26 +88,44 @@ tasks:
       message between provided refs 's' (start) and 'e' (end).
     cmd: git log --pretty=format:'- %s' {{ .s }}...{{ .e }}
 
-  create-github-release:
-    aliases: [cghr]
-    desc: Creates a GitHub release.
-    preconditions:
-      - sh: '[[ -n "{{ .tag }}" ]]'
-        msg: A 'tag' input value is required.
-      - sh: '[[ -n "{{ .title }}" ]]'
-        msg: A 'title' input value is required.
+  create-release-file:
+    aliases: [build]
+    desc: Creates the zipped release file to attach to the GitHub release.
+    cmds:
+      # Clean up any zip files from previous builds
+      - cmd: rm -rf *.zip
+      # Create the dist directory
+      - cmd: mkdir '{{ .dist_dir }}'
+      # Defer cleanup of the dist directory
+      - defer: rm -rf '{{ .dist_dir }}'
+      # Generate the TOC file
+      - task: generate-toc
+      # Defer cleanup of the TOC file
+      - defer: rm -rf '{{ .toc_name }}'
+      # Copy all addon files to the dist directory
+      - cmd: cp ShathYar.lua '{{ .dist_dir }}'
+      - cmd: cp ShathYar.toc '{{ .dist_dir }}'
+      - cmd: cp ShathYar.xml '{{ .dist_dir }}'
+      - cmd: cp LICENSE '{{ .dist_dir }}'
+      # Create the release zip file
+      - cmd: zip -r '{{ .zip_name }}' '{{ .dist_dir }}'
+
+  publish-github-release:
+    aliases: [ghr]
+    desc: Publishes the release file to GitHub.
     env:
       tag: '{{ .tag }}'
       title: '{{ .title }}'
       body: '{{ .body }}'
-      files: '{{ .zip_name }}'
       repo_owner: '{{ .repo_owner }}'
       repo_name: '{{ .repo_name }}'
+      zip_name: '{{ .zip_name }}'
+    cmds:
+      - cmd: .github/scripts/publish-release.sh
+
+  create-github-release:
+    aliases: [cghr]
+    desc: Creates a GitHub release.
     cmds:
       - task: create-release-file
-      - cmd: |
-          gh release create "{{ .tag }}" \
-            --title "{{ .title }}" \
-            --notes "{{ .body }}" \
-            --repo "{{ .repo_owner }}/{{ .repo_name }}" \
-            '{{ .zip_name }}'
+      - task: publish-github-release
